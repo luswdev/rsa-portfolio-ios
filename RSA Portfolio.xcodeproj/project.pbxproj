@@ -1,0 +1,587 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9048E1912C01EA59004B856A /* RSA_PortfolioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9048E1902C01EA59004B856A /* RSA_PortfolioApp.swift */; };
+		9048E1932C01EA59004B856A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9048E1922C01EA59004B856A /* ContentView.swift */; };
+		9048E1952C01EA5A004B856A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9048E1942C01EA5A004B856A /* Assets.xcassets */; };
+		9048E1982C01EA5A004B856A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9048E1972C01EA5A004B856A /* Preview Assets.xcassets */; };
+		9048E1A22C01EA5A004B856A /* RSA_PortfolioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9048E1A12C01EA5A004B856A /* RSA_PortfolioTests.swift */; };
+		9048E1AC2C01EA5A004B856A /* RSA_PortfolioUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9048E1AB2C01EA5A004B856A /* RSA_PortfolioUITests.swift */; };
+		9048E1AE2C01EA5A004B856A /* RSA_PortfolioUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9048E1AD2C01EA5A004B856A /* RSA_PortfolioUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9048E19E2C01EA5A004B856A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9048E1852C01EA59004B856A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9048E18C2C01EA59004B856A;
+			remoteInfo = "RSA Portfolio";
+		};
+		9048E1A82C01EA5A004B856A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9048E1852C01EA59004B856A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9048E18C2C01EA59004B856A;
+			remoteInfo = "RSA Portfolio";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		9048E18D2C01EA59004B856A /* RSA Portfolio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RSA Portfolio.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9048E1902C01EA59004B856A /* RSA_PortfolioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSA_PortfolioApp.swift; sourceTree = "<group>"; };
+		9048E1922C01EA59004B856A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		9048E1942C01EA5A004B856A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9048E1972C01EA5A004B856A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		9048E19D2C01EA5A004B856A /* RSA PortfolioTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RSA PortfolioTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9048E1A12C01EA5A004B856A /* RSA_PortfolioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSA_PortfolioTests.swift; sourceTree = "<group>"; };
+		9048E1A72C01EA5A004B856A /* RSA PortfolioUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RSA PortfolioUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9048E1AB2C01EA5A004B856A /* RSA_PortfolioUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSA_PortfolioUITests.swift; sourceTree = "<group>"; };
+		9048E1AD2C01EA5A004B856A /* RSA_PortfolioUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSA_PortfolioUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9048E18A2C01EA59004B856A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9048E19A2C01EA5A004B856A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9048E1A42C01EA5A004B856A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9048E1842C01EA59004B856A = {
+			isa = PBXGroup;
+			children = (
+				9048E18F2C01EA59004B856A /* RSA Portfolio */,
+				9048E1A02C01EA5A004B856A /* RSA PortfolioTests */,
+				9048E1AA2C01EA5A004B856A /* RSA PortfolioUITests */,
+				9048E18E2C01EA59004B856A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9048E18E2C01EA59004B856A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9048E18D2C01EA59004B856A /* RSA Portfolio.app */,
+				9048E19D2C01EA5A004B856A /* RSA PortfolioTests.xctest */,
+				9048E1A72C01EA5A004B856A /* RSA PortfolioUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9048E18F2C01EA59004B856A /* RSA Portfolio */ = {
+			isa = PBXGroup;
+			children = (
+				9048E1902C01EA59004B856A /* RSA_PortfolioApp.swift */,
+				9048E1922C01EA59004B856A /* ContentView.swift */,
+				9048E1942C01EA5A004B856A /* Assets.xcassets */,
+				9048E1962C01EA5A004B856A /* Preview Content */,
+			);
+			path = "RSA Portfolio";
+			sourceTree = "<group>";
+		};
+		9048E1962C01EA5A004B856A /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				9048E1972C01EA5A004B856A /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		9048E1A02C01EA5A004B856A /* RSA PortfolioTests */ = {
+			isa = PBXGroup;
+			children = (
+				9048E1A12C01EA5A004B856A /* RSA_PortfolioTests.swift */,
+			);
+			path = "RSA PortfolioTests";
+			sourceTree = "<group>";
+		};
+		9048E1AA2C01EA5A004B856A /* RSA PortfolioUITests */ = {
+			isa = PBXGroup;
+			children = (
+				9048E1AB2C01EA5A004B856A /* RSA_PortfolioUITests.swift */,
+				9048E1AD2C01EA5A004B856A /* RSA_PortfolioUITestsLaunchTests.swift */,
+			);
+			path = "RSA PortfolioUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9048E18C2C01EA59004B856A /* RSA Portfolio */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9048E1B12C01EA5A004B856A /* Build configuration list for PBXNativeTarget "RSA Portfolio" */;
+			buildPhases = (
+				9048E1892C01EA59004B856A /* Sources */,
+				9048E18A2C01EA59004B856A /* Frameworks */,
+				9048E18B2C01EA59004B856A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "RSA Portfolio";
+			productName = "RSA Portfolio";
+			productReference = 9048E18D2C01EA59004B856A /* RSA Portfolio.app */;
+			productType = "com.apple.product-type.application";
+		};
+		9048E19C2C01EA5A004B856A /* RSA PortfolioTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9048E1B42C01EA5A004B856A /* Build configuration list for PBXNativeTarget "RSA PortfolioTests" */;
+			buildPhases = (
+				9048E1992C01EA5A004B856A /* Sources */,
+				9048E19A2C01EA5A004B856A /* Frameworks */,
+				9048E19B2C01EA5A004B856A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9048E19F2C01EA5A004B856A /* PBXTargetDependency */,
+			);
+			name = "RSA PortfolioTests";
+			productName = "RSA PortfolioTests";
+			productReference = 9048E19D2C01EA5A004B856A /* RSA PortfolioTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		9048E1A62C01EA5A004B856A /* RSA PortfolioUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9048E1B72C01EA5A004B856A /* Build configuration list for PBXNativeTarget "RSA PortfolioUITests" */;
+			buildPhases = (
+				9048E1A32C01EA5A004B856A /* Sources */,
+				9048E1A42C01EA5A004B856A /* Frameworks */,
+				9048E1A52C01EA5A004B856A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9048E1A92C01EA5A004B856A /* PBXTargetDependency */,
+			);
+			name = "RSA PortfolioUITests";
+			productName = "RSA PortfolioUITests";
+			productReference = 9048E1A72C01EA5A004B856A /* RSA PortfolioUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9048E1852C01EA59004B856A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1530;
+				LastUpgradeCheck = 1530;
+				TargetAttributes = {
+					9048E18C2C01EA59004B856A = {
+						CreatedOnToolsVersion = 15.3;
+					};
+					9048E19C2C01EA5A004B856A = {
+						CreatedOnToolsVersion = 15.3;
+						TestTargetID = 9048E18C2C01EA59004B856A;
+					};
+					9048E1A62C01EA5A004B856A = {
+						CreatedOnToolsVersion = 15.3;
+						TestTargetID = 9048E18C2C01EA59004B856A;
+					};
+				};
+			};
+			buildConfigurationList = 9048E1882C01EA59004B856A /* Build configuration list for PBXProject "RSA Portfolio" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9048E1842C01EA59004B856A;
+			productRefGroup = 9048E18E2C01EA59004B856A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9048E18C2C01EA59004B856A /* RSA Portfolio */,
+				9048E19C2C01EA5A004B856A /* RSA PortfolioTests */,
+				9048E1A62C01EA5A004B856A /* RSA PortfolioUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9048E18B2C01EA59004B856A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9048E1982C01EA5A004B856A /* Preview Assets.xcassets in Resources */,
+				9048E1952C01EA5A004B856A /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9048E19B2C01EA5A004B856A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9048E1A52C01EA5A004B856A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9048E1892C01EA59004B856A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9048E1932C01EA59004B856A /* ContentView.swift in Sources */,
+				9048E1912C01EA59004B856A /* RSA_PortfolioApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9048E1992C01EA5A004B856A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9048E1A22C01EA5A004B856A /* RSA_PortfolioTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9048E1A32C01EA5A004B856A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9048E1AE2C01EA5A004B856A /* RSA_PortfolioUITestsLaunchTests.swift in Sources */,
+				9048E1AC2C01EA5A004B856A /* RSA_PortfolioUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9048E19F2C01EA5A004B856A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9048E18C2C01EA59004B856A /* RSA Portfolio */;
+			targetProxy = 9048E19E2C01EA5A004B856A /* PBXContainerItemProxy */;
+		};
+		9048E1A92C01EA5A004B856A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9048E18C2C01EA59004B856A /* RSA Portfolio */;
+			targetProxy = 9048E1A82C01EA5A004B856A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		9048E1AF2C01EA5A004B856A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		9048E1B02C01EA5A004B856A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9048E1B22C01EA5A004B856A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"RSA Portfolio/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "lusw.dev.RSA-Portfolio";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9048E1B32C01EA5A004B856A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"RSA Portfolio/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "lusw.dev.RSA-Portfolio";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		9048E1B52C01EA5A004B856A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "lusw.dev.RSA-PortfolioTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RSA Portfolio.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/RSA Portfolio";
+			};
+			name = Debug;
+		};
+		9048E1B62C01EA5A004B856A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "lusw.dev.RSA-PortfolioTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RSA Portfolio.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/RSA Portfolio";
+			};
+			name = Release;
+		};
+		9048E1B82C01EA5A004B856A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "lusw.dev.RSA-PortfolioUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "RSA Portfolio";
+			};
+			name = Debug;
+		};
+		9048E1B92C01EA5A004B856A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "lusw.dev.RSA-PortfolioUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "RSA Portfolio";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9048E1882C01EA59004B856A /* Build configuration list for PBXProject "RSA Portfolio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9048E1AF2C01EA5A004B856A /* Debug */,
+				9048E1B02C01EA5A004B856A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9048E1B12C01EA5A004B856A /* Build configuration list for PBXNativeTarget "RSA Portfolio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9048E1B22C01EA5A004B856A /* Debug */,
+				9048E1B32C01EA5A004B856A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9048E1B42C01EA5A004B856A /* Build configuration list for PBXNativeTarget "RSA PortfolioTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9048E1B52C01EA5A004B856A /* Debug */,
+				9048E1B62C01EA5A004B856A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9048E1B72C01EA5A004B856A /* Build configuration list for PBXNativeTarget "RSA PortfolioUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9048E1B82C01EA5A004B856A /* Debug */,
+				9048E1B92C01EA5A004B856A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9048E1852C01EA59004B856A /* Project object */;
+}
