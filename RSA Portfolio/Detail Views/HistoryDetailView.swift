@@ -12,7 +12,9 @@ struct HistoryDetailView: View {
     var twdusd: Decimal
     var history: HistoryStruct
     var historyIndex: Int
-    
+
+    @Binding private var selectedCurrency: CurrencyBase
+
     @State private var showEdit = false
 
     var body: some View {
@@ -39,12 +41,12 @@ struct HistoryDetailView: View {
                     HStack {
                         Text("Cost")
                         Spacer()
-                        Text(history.us.cost, format: Decimal.FormatStyle.Currency(code: "TWD"))
+                        Text(history.us.cost, format: Decimal.FormatStyle.Currency(code: "USD"))
                     }
                     HStack {
                         Text("Balance")
                         Spacer()
-                        Text(history.us.balance, format: Decimal.FormatStyle.Currency(code: "TWD"))
+                        Text(history.us.balance, format: Decimal.FormatStyle.Currency(code: "USD"))
                     }
                     HStack {
                         Text("CAGR")
@@ -56,14 +58,14 @@ struct HistoryDetailView: View {
                     HStack {
                         Text("Cost")
                         Spacer()
-                        Text(history.tw.cost + history.us.cost * twdusd,
-                             format: Decimal.FormatStyle.Currency(code: "TWD"))
+                        Text(history.tw.getCost(selectedCurrency: selectedCurrency, twdusd: twdusd) + history.us.getCost(selectedCurrency: selectedCurrency, twdusd: twdusd),
+                             format: Decimal.FormatStyle.Currency(code: selectedCurrency.rawValue))
                     }
                     HStack {
                         Text("Balance")
                         Spacer()
-                        Text(history.tw.balance + history.us.balance * twdusd,
-                             format: Decimal.FormatStyle.Currency(code: "TWD"))
+                        Text(history.tw.getBalance(selectedCurrency: selectedCurrency, twdusd: twdusd) + history.us.getBalance(selectedCurrency: selectedCurrency, twdusd: twdusd),
+                             format: Decimal.FormatStyle.Currency(code: selectedCurrency.rawValue))
                     }
                     HStack {
                         Text("CAGR")
@@ -95,10 +97,12 @@ struct HistoryDetailView: View {
 
     init(
         twdusd: Decimal,
+        selectedCurrency: Binding<CurrencyBase>,
         history: HistoryStruct,
         historyIndex: Int
     ) {
         self.twdusd = twdusd
+        self._selectedCurrency = selectedCurrency
         self.history = history
         self.historyIndex = historyIndex
     }
@@ -118,6 +122,7 @@ struct HistoryDetailView: View {
 #Preview {
     HistoryDetailView(
         twdusd: 30,
+        selectedCurrency: .constant(CurrencyBase.usd),
         history: HistoryStruct(date: "May 2024", usCost: 900, usBalance: 904.86, twCost: 43381, twBalance: 43880.00),
         historyIndex: 1
     )

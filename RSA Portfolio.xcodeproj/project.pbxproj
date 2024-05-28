@@ -27,6 +27,9 @@
 		9048E1D52C039142004B856A /* StockEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9048E1D42C039142004B856A /* StockEditorView.swift */; };
 		9048E1D72C039A8A004B856A /* HistoryEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9048E1D62C039A8A004B856A /* HistoryEditorView.swift */; };
 		9048E1D92C039C03004B856A /* ExtensionDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9048E1D82C039C03004B856A /* ExtensionDate.swift */; };
+		90EEA26D2C062B30000740E0 /* RoundedCornersShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EEA26C2C062B30000740E0 /* RoundedCornersShape.swift */; };
+		90EEA2702C062B84000740E0 /* HistoryStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EEA26F2C062B84000740E0 /* HistoryStruct.swift */; };
+		90EEA2722C062BA9000740E0 /* PositionStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EEA2712C062BA9000740E0 /* PositionStruct.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +73,9 @@
 		9048E1D62C039A8A004B856A /* HistoryEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryEditorView.swift; sourceTree = "<group>"; };
 		9048E1D82C039C03004B856A /* ExtensionDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDate.swift; sourceTree = "<group>"; };
 		90ACC7D02C04F91C00AFA912 /* RSA-Portfolio-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "RSA-Portfolio-Info.plist"; sourceTree = SOURCE_ROOT; };
+		90EEA26C2C062B30000740E0 /* RoundedCornersShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornersShape.swift; sourceTree = "<group>"; };
+		90EEA26F2C062B84000740E0 /* HistoryStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryStruct.swift; sourceTree = "<group>"; };
+		90EEA2712C062BA9000740E0 /* PositionStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionStruct.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,11 +131,12 @@
 				90EEA2692C05726A000740E0 /* Detail Views */,
 				90EEA26A2C057287000740E0 /* Editor Views */,
 				90EEA26B2C05741E000740E0 /* Utility */,
+				90EEA26E2C062B62000740E0 /* Data Structures */,
+				9048E1962C01EA5A004B856A /* Preview Content */,
 				90ACC7D02C04F91C00AFA912 /* RSA-Portfolio-Info.plist */,
 				9048E1902C01EA59004B856A /* RSA_PortfolioApp.swift */,
 				9048E1922C01EA59004B856A /* ContentView.swift */,
 				9048E1942C01EA5A004B856A /* Assets.xcassets */,
-				9048E1962C01EA5A004B856A /* Preview Content */,
 			);
 			path = "RSA Portfolio";
 			sourceTree = "<group>";
@@ -192,11 +199,21 @@
 			isa = PBXGroup;
 			children = (
 				9048E1D82C039C03004B856A /* ExtensionDate.swift */,
+				90EEA26C2C062B30000740E0 /* RoundedCornersShape.swift */,
 				9048E1C62C0272EA004B856A /* ExtensionColor.swift */,
 				9048E1C02C02047B004B856A /* PortfolioAPI.swift */,
 				9048E1CD2C027C06004B856A /* RefreshView.swift */,
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		90EEA26E2C062B62000740E0 /* Data Structures */ = {
+			isa = PBXGroup;
+			children = (
+				90EEA26F2C062B84000740E0 /* HistoryStruct.swift */,
+				90EEA2712C062BA9000740E0 /* PositionStruct.swift */,
+			);
+			path = "Data Structures";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -336,6 +353,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90EEA2722C062BA9000740E0 /* PositionStruct.swift in Sources */,
 				9048E1D52C039142004B856A /* StockEditorView.swift in Sources */,
 				9048E1932C01EA59004B856A /* ContentView.swift in Sources */,
 				9048E1C32C020587004B856A /* LoginTabView.swift in Sources */,
@@ -346,10 +364,12 @@
 				9048E1BD2C01F7BB004B856A /* HistoryTabView.swift in Sources */,
 				9048E1CE2C027C06004B856A /* RefreshView.swift in Sources */,
 				9048E1D92C039C03004B856A /* ExtensionDate.swift in Sources */,
+				90EEA2702C062B84000740E0 /* HistoryStruct.swift in Sources */,
 				9048E1C12C02047B004B856A /* PortfolioAPI.swift in Sources */,
 				9048E1D72C039A8A004B856A /* HistoryEditorView.swift in Sources */,
 				9048E1BB2C01F0A2004B856A /* PositionTabView.swift in Sources */,
 				9048E1912C01EA59004B856A /* RSA_PortfolioApp.swift in Sources */,
+				90EEA26D2C062B30000740E0 /* RoundedCornersShape.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,7 +549,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "lusw.dev.RSA-Portfolio";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -564,7 +584,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "lusw.dev.RSA-Portfolio";
 				PRODUCT_NAME = "$(TARGET_NAME)";

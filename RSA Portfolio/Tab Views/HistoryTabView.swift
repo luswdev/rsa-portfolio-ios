@@ -9,98 +9,6 @@ import Foundation
 import SwiftUI
 import Charts
 
-struct HistoryStruct: Identifiable {
-    let id = UUID()
-
-    struct SubHistory: Hashable {
-        var cost: Decimal
-        var balance: Decimal
-        
-        init(cost: Decimal, balance: Decimal) {
-            self.cost = cost
-            self.balance = balance
-        }
-        
-        static func == (lhs: SubHistory, rhs: SubHistory) -> Bool {
-            if lhs.cost != rhs.cost {
-                return false
-            }
-            
-            if lhs.balance != rhs.balance {
-                return false
-            }
-            
-            return true
-        }
-    }
-    
-    var date: String
-    var us: SubHistory
-    var tw: SubHistory
-
-    init(date: String, usCost: Decimal, usBalance: Decimal, twCost: Decimal , twBalance: Decimal){
-        self.date = date
-        self.us = SubHistory(cost: usCost, balance: usBalance)
-        self.tw = SubHistory(cost: twCost, balance: twBalance)
-    }
-    
-    static func == (lhs: HistoryStruct, rhs: HistoryStruct) -> Bool {
-        if lhs.date != rhs.date {
-            return false
-        }
-        
-        if lhs.tw != rhs.tw {
-            return false
-        }
-        
-        if lhs.us != rhs.us {
-            return false
-        }
-        
-        return true
-    }
-}
-
-struct RoundedCorners: Shape {
-    var tl: CGFloat = 0.0
-    var tr: CGFloat = 0.0
-    var bl: CGFloat = 0.0
-    var br: CGFloat = 0.0
-    
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        
-        let w = rect.size.width
-        let h = rect.size.height
-        
-        // Make sure we do not exceed the size of the rectangle
-        let tr = min(min(self.tr, h/2), w/2)
-        let tl = min(min(self.tl, h/2), w/2)
-        let bl = min(min(self.bl, h/2), w/2)
-        let br = min(min(self.br, h/2), w/2)
-        
-        path.move(to: CGPoint(x: w / 2.0, y: 0))
-        path.addLine(to: CGPoint(x: w - tr, y: 0))
-        path.addArc(center: CGPoint(x: w - tr, y: tr), radius: tr,
-                    startAngle: Angle(degrees: -90), endAngle: Angle(degrees: 0), clockwise: false)
-        
-        path.addLine(to: CGPoint(x: w, y: h - br))
-        path.addArc(center: CGPoint(x: w - br, y: h - br), radius: br,
-                    startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 90), clockwise: false)
-        
-        path.addLine(to: CGPoint(x: bl, y: h))
-        path.addArc(center: CGPoint(x: bl, y: h - bl), radius: bl,
-                    startAngle: Angle(degrees: 90), endAngle: Angle(degrees: 180), clockwise: false)
-        
-        path.addLine(to: CGPoint(x: 0, y: tl))
-        path.addArc(center: CGPoint(x: tl, y: tl), radius: tl,
-                    startAngle: Angle(degrees: 180), endAngle: Angle(degrees: 270), clockwise: false)
-        path.closeSubpath()
-
-        return path
-    }
-}
-
 struct HistoryTabView: View {
     var histories: [HistoryStruct]
     
@@ -113,11 +21,11 @@ struct HistoryTabView: View {
     @State private var pickedMarket: [HistoryStruct.SubHistory]
     var pickerMarketBalanceMin: Decimal {
         pickedMarket.count != 0 ?
-        pickedMarket.map(\.balance).min()! : 0
+        pickedMarket.map { $0.getBalance(selectedCurrency: selectedCurrency, twdusd: twdusd) } .min()! : 0
     }
     var pickerMarketBalanceMax: Decimal {
         pickedMarket.count != 0 ?
-        pickedMarket.map(\.balance).max()! : 10
+        pickedMarket.map { $0.getBalance(selectedCurrency: selectedCurrency, twdusd: twdusd) } .max()! : 10
     }
     var pickerMarketBalanceScale: Decimal {
         (pickerMarketBalanceMax - pickerMarketBalanceMin) * 0.1
@@ -131,6 +39,8 @@ struct HistoryTabView: View {
     
     @State private var selectedRow: HistoryStruct?
     @State private var rawSelectedDate: Date?
+
+    @Binding private var selectedCurrency: CurrencyBase
     
     let primaryColorGradient = LinearGradient(
         gradient: Gradient (
@@ -152,8 +62,9 @@ struct HistoryTabView: View {
                     Text("United State").tag(histories.map { $0.us })
                     Text("Total").tag(histories.map {
                         HistoryStruct.SubHistory(
-                            cost: $0.tw.cost + $0.us.cost * twdusd,
-                            balance: $0.tw.balance + $0.us.balance * twdusd
+                            cost: $0.tw.getCost(selectedCurrency: selectedCurrency, twdusd: twdusd) + $0.us.getCost(selectedCurrency: selectedCurrency, twdusd: twdusd),
+                            balance: $0.tw.getBalance(selectedCurrency: selectedCurrency, twdusd: twdusd) + $0.us.getBalance(selectedCurrency: selectedCurrency, twdusd: twdusd),
+                            currency: selectedCurrency
                         )
                     })
                 }
@@ -161,13 +72,13 @@ struct HistoryTabView: View {
                 .padding(.top)
                 .pickerStyle(.segmented)
 
-                if selectedRow != nil || histories.count == 0 {
+                if selectedRow != nil || histories.count == 0 || pickedMarket.count == 0{
                     VStack(alignment: .leading) {
                         Text("Balance")
                             .foregroundColor(.clear)
                             .font(.system(size: 14))
                         Spacer().frame(height: 2)
-                        Text(0, format: Decimal.FormatStyle.Currency(code: "TWD"))
+                        Text(0, format: Decimal.FormatStyle.Currency(code: selectedCurrency.rawValue))
                             .foregroundColor(.clear)
                             .font(.system(size: 22, weight: .bold, design: Font.Design.rounded))
                         Spacer().frame(height: 2)
@@ -185,10 +96,10 @@ struct HistoryTabView: View {
                             .foregroundColor(.secondary)
                             .font(.system(size: 14))
                         Spacer().frame(height: 2)
-                        Text((pickedMarket.last != nil) ? pickedMarket.last!.balance : 0, format: Decimal.FormatStyle.Currency(code: "TWD"))
+                        Text(pickedMarket.last!.getBalance(selectedCurrency: selectedCurrency, twdusd: twdusd), format: Decimal.FormatStyle.Currency(code: selectedCurrency.rawValue))
                             .font(.system(size: 22, weight: .bold, design: Font.Design.rounded))
                         Spacer().frame(height: 2)
-                        Text((histories.last != nil) ? histories.last!.date : "-")
+                        Text(histories.last!.date)
                             .foregroundColor(.secondary)
                             .font(.system(size: 14))
                     }
@@ -203,7 +114,7 @@ struct HistoryTabView: View {
                     ForEach(Array(histories.enumerated()), id: \.offset) { index, history in
                         LineMark(
                             x: .value("Month", str2date(dateString: history.date), unit: .month),
-                            y: .value("Balance", pickedMarket[index].balance)
+                            y: .value("Balance", pickedMarket[index].getBalance(selectedCurrency: selectedCurrency, twdusd: twdusd))
                         )
                         .symbol(.circle)
                         .symbolSize(75)
@@ -213,7 +124,7 @@ struct HistoryTabView: View {
                         AreaMark(
                             x: .value("Month", str2date(dateString: history.date), unit: .month),
                             yStart: .value("Min Balance", pickerMarketBalanceDomain[0]),
-                            yEnd: .value("Max Balance", pickedMarket[index].balance)
+                            yEnd: .value("Max Balance", pickedMarket[index].getBalance(selectedCurrency: selectedCurrency, twdusd: twdusd))
                         )
                         .interpolationMethod(.linear)
                         .foregroundStyle(primaryColorGradient)
@@ -238,7 +149,7 @@ struct HistoryTabView: View {
                                     .foregroundColor(.secondary)
                                     .font(.system(size: 14))
                                 Spacer().frame(height: 2)
-                                Text(pickedMarket[findSelectedSectorIndex(value: selectedRow) ?? 0].balance, format: Decimal.FormatStyle.Currency(code: "TWD"))
+                                Text(pickedMarket[findSelectedSectorIndex(value: selectedRow) ?? 0].getBalance(selectedCurrency: selectedCurrency, twdusd: twdusd), format: Decimal.FormatStyle.Currency(code: selectedCurrency.rawValue))
                                     .font(.system(size: 22, weight: .bold, design: Font.Design.rounded))
                                 Spacer().frame(height: 2)
                                 Text(selectedRow.date)
@@ -247,7 +158,7 @@ struct HistoryTabView: View {
                             }
                             .padding(.horizontal, 10)
                             .padding(.top, 2)
-                            .background(RoundedCorners(tl: 3, tr: 3, bl: 3, br: 3).fill(Color(.secondarySystemBackground)))
+                            .background(RoundedCornersShape(tl: 3, tr: 3, bl: 3, br: 3).fill(Color(.secondarySystemBackground)))
                         }
                     }
                 }
@@ -270,7 +181,7 @@ struct HistoryTabView: View {
                                     Text(history.date)
                                 }
                                 Spacer()
-                                Text(pickedMarket[index].balance, format: Decimal.FormatStyle.Currency(code: "TWD"))
+                                Text(pickedMarket[index].getBalance(selectedCurrency: selectedCurrency, twdusd: twdusd), format: Decimal.FormatStyle.Currency(code: selectedCurrency.rawValue))
                                     .foregroundColor(.secondary)
                                     .font(.system(size: 20, weight: .bold, design: Font.Design.rounded))
                             }.onTapGesture {
@@ -298,7 +209,12 @@ struct HistoryTabView: View {
             .navigationTitle("Histories")
         }
         .sheet(isPresented: self.$showDetail) {
-            HistoryDetailView(twdusd: twdusd, history: histories[clickIndex], historyIndex: clickIndex)
+            HistoryDetailView(
+                twdusd: twdusd,
+                selectedCurrency: $selectedCurrency,
+                history: histories[clickIndex],
+                historyIndex: clickIndex
+            )
         }
         .sheet(isPresented: $showEdit) {
             HistoryEditorView(history: HistoryStruct(date: "", usCost: 0, usBalance: 0, twCost: 0, twBalance: 0))
@@ -307,11 +223,13 @@ struct HistoryTabView: View {
     
     init(
         histories: [HistoryStruct] = [HistoryStruct](),
-        twdusd: Binding<Decimal>
+        twdusd: Binding<Decimal>,
+        selectedCurrency: Binding<CurrencyBase>
     ) {
         self.histories = histories
         self.pickedMarket = histories.map { $0.tw }
         self._twdusd = twdusd
+        self._selectedCurrency = selectedCurrency
     }
     
     private func findSelectedSector(value: Date) -> HistoryStruct? {
@@ -345,5 +263,9 @@ var histories = [
 ]
 
 #Preview {
-    HistoryTabView(twdusd: .constant(30))
+    HistoryTabView(
+        histories: histories,
+        twdusd: .constant(30),
+        selectedCurrency: .constant(CurrencyBase.usd)
+    )
 }

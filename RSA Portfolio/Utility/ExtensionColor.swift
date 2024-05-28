@@ -8,6 +8,11 @@
 import Foundation
 import SwiftUI
 
+let trendColor: [[Color]] = [
+    [.green, .red],
+    [.red, .green]
+]
+
 func hex2color(hex: String) -> Color? {
     let r, g, b: CGFloat
 
@@ -48,4 +53,14 @@ func color2hex(color: Color) -> String {
     }
     
     return hexString
+}
+
+func trendColor(trend: Bool , trendStyle: Bool) -> Color {
+    let trendRaise: Color = trendColor[trendStyle ? 1 : 0][0]
+    let trendFall:  Color = trendColor[trendStyle ? 1 : 0][1]
+    if (trend) {
+        return trendRaise
+    } else {
+        return trendFall
+    }
 }

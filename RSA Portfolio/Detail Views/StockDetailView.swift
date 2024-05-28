@@ -16,6 +16,7 @@ struct StockDetailView: View {
     }
     
     @Binding private var trendStyle: Bool
+
     @State private var showEdit = false
     
     var body: some View {
@@ -40,14 +41,14 @@ struct StockDetailView: View {
                     HStack {
                         Text("Last")
                         Spacer()
-                        Text(position.current, format: Decimal.FormatStyle.Currency(code: "TWD"))
+                        Text(position.current, format: Decimal.FormatStyle.Currency(code: position.currency.rawValue))
                             .foregroundColor(.secondary)
                     }
                     HStack {
                         Text("Change")
                         Spacer()
-                        Text(position.current - position.last, format: Decimal.FormatStyle.Currency(code: "TWD"))
-                            .foregroundColor(position.current >= position.last ? trendColor[trendStyle ? 1 : 0][0] : trendColor[trendStyle ? 1 : 0][1])
+                        Text(position.current - position.last, format: Decimal.FormatStyle.Currency(code: position.currency.rawValue))
+                            .foregroundColor(trendColor(trend: position.current >= position.last, trendStyle: trendStyle))
                     }
                 }
                 Section(header: Text("Holds")) {
@@ -60,26 +61,36 @@ struct StockDetailView: View {
                     HStack {
                         Text("Cost")
                         Spacer()
-                        Text(position.cost, format: Decimal.FormatStyle.Currency(code: "TWD"))
+                        Text(position.cost, format: Decimal.FormatStyle.Currency(code: position.currency.rawValue))
                             .foregroundColor(.secondary)
                     }
                     HStack {
                         Text("Value")
                         Spacer()
-                        Text(position.current * position.quantity, format: Decimal.FormatStyle.Currency(code: "TWD"))
+                        Text(position.current * position.quantity, format: Decimal.FormatStyle.Currency(code: position.currency.rawValue))
                             .foregroundColor(.secondary)
                     }
                     HStack {
                         Text("Gain/Loss")
                         Spacer()
-                        Text(position.current * position.quantity - position.cost, format: Decimal.FormatStyle.Currency(code: "TWD"))
-                            .foregroundColor(position.current * position.quantity >= position.cost ? trendColor[trendStyle ? 1 : 0][0] : trendColor[trendStyle ? 1 : 0][1])
+                        Text(position.current * position.quantity - position.cost, format: Decimal.FormatStyle.Currency(code: position.currency.rawValue))
+                            .foregroundColor(
+                                trendColor(
+                                    trend: position.current * position.quantity >= position.cost,
+                                    trendStyle: trendStyle
+                                )
+                            )
                     }
                     HStack {
                         Text("Return")
                         Spacer()
                         Text("\(returns * 100, specifier: "%.2f")%")
-                            .foregroundColor(position.current * position.quantity >= position.cost ? trendColor[trendStyle ? 1 : 0][0] : trendColor[trendStyle ? 1 : 0][1])
+                            .foregroundColor(
+                                trendColor(
+                                    trend: position.current * position.quantity >= position.cost,
+                                    trendStyle: trendStyle
+                                )
+                            )
                     }
                 }
             }
@@ -114,5 +125,8 @@ struct StockDetailView: View {
 }
 
 #Preview {
-    StockDetailView(position: PositionStruct(ticker: "QQQ", name: "Invesco QQQ Trust", quantity: 0.66656, cost: 300, color: "#26a69a"), trendStyle: .constant(false))
+    StockDetailView(
+        position: PositionStruct(ticker: "QQQ", name: "Invesco QQQ Trust", quantity: 0.66656, cost: 300, color: "#26a69a"),
+        trendStyle: .constant(false)
+    )
 }

@@ -29,14 +29,24 @@ struct ContentView: View {
 
     var body: some View {
         TabView {
-            PositionTabView(positions: $positions, twdusd: $twdusd, trendStyle: $trendStyle, API: API)
-                .tabItem {
-                    Label("Positions", systemImage: "tray.full.fill")
-                }
-            HistoryTabView(histories: histories, twdusd: $twdusd)
-                .tabItem {
-                    Label("Histories", systemImage: "clock")
-                }
+            PositionTabView(
+                positions: $positions,
+                twdusd: $twdusd,
+                selectedCurrency: $selectedCurrency,
+                trendStyle: $trendStyle,
+                API: API
+            ).tabItem {
+                Label("Positions", systemImage: "tray.full.fill")
+            }
+
+            HistoryTabView(
+                histories: histories,
+                twdusd: $twdusd,
+                selectedCurrency: $selectedCurrency
+            ).tabItem {
+                Label("Histories", systemImage: "clock")
+            }
+
             SettingTabView(
                 isNeedLogin: $isNeedLogin,
                 faceIdEn: $faceIdEn,
@@ -61,7 +71,6 @@ struct ContentView: View {
                 API: API
             )
         }
-
     }
     
     init(API: PortfolioAPI = PortfolioAPI()) {

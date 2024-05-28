@@ -11,28 +11,6 @@ import Charts
 import SwiftUIPullToRefresh
 import Combine
 
-struct PositionStruct: Identifiable {
-    let id = UUID()
-    
-    var color: String
-    var ticker: String
-    var name: String
-    var current: Decimal
-    var last: Decimal
-    var quantity: Decimal
-    var cost: Decimal
-    
-    init(ticker: String, name: String, quantity: Decimal, cost: Decimal, color: String){
-        self.ticker = ticker
-        self.name = name
-        self.quantity = quantity
-        self.cost = cost
-        self.color = color
-        self.current = 457.95
-        self.last =  455.71
-    }
-}
-
 struct PositionTabView: View {
     var API: PortfolioAPI
     
@@ -51,23 +29,17 @@ struct PositionTabView: View {
     @State private var selectedAngle: Decimal?
     @State private var selectedValue: Float?
     
+    @Binding private var selectedCurrency: CurrencyBase
+    
     var totalValue: Decimal {
         positions.reduce(into: Decimal(0)) { (result, position) in
-            if position.ticker.rangeOfCharacter(from: .decimalDigits) != nil {
-                result += position.current * position.quantity
-            } else {
-                result += position.current * position.quantity * self.twdusd
-            }
+            result += position.getValue(selectedCurrency: selectedCurrency, twdusd: twdusd)
         }
     }
 
     var totalCost: Decimal {
         positions.reduce(into: Decimal(0)) { (result, position) in
-            if position.ticker.rangeOfCharacter(from: .decimalDigits) != nil {
-                result += position.cost
-            } else {
-                result += position.cost * self.twdusd
-            }
+            result += position.getCost(selectedCurrency: selectedCurrency, twdusd: twdusd)
         }
     }
 
@@ -84,14 +56,15 @@ struct PositionTabView: View {
             VStack() {
                 HStack() {
                     VStack(alignment: .leading) {
-                        Text(totalValue, format: Decimal.FormatStyle.Currency(code: "TWD"))
+                        Text(totalValue, format: Decimal.FormatStyle.Currency(code: selectedCurrency.rawValue))
                             .font(.system(size: 45, weight: .bold, design: Font.Design.rounded))
-                            .foregroundColor(totalValue >= totalCost ? trendColor[trendStyle ? 1 : 0][0] : trendColor[trendStyle ? 1 : 0][1])
+                            .foregroundColor(trendColor(trend: (totalValue >= totalCost), trendStyle: trendStyle))
+
                         HStack {
-                            Text(gainLoss, format: Decimal.FormatStyle.Currency(code: "TWD"))
-                                .foregroundColor(totalValue >= totalCost ? trendColor[trendStyle ? 1 : 0][0] : trendColor[trendStyle ? 1 : 0][1])
+                            Text(gainLoss, format: Decimal.FormatStyle.Currency(code: selectedCurrency.rawValue))
+                                .foregroundColor(trendColor(trend: (totalValue >= totalCost), trendStyle: trendStyle))
                             Text("(\(gainLossRate, specifier: "%.2f")%)")
-                                .foregroundColor(totalValue >= totalCost ? trendColor[trendStyle ? 1 : 0][0] : trendColor[trendStyle ? 1 : 0][1])
+                                .foregroundColor(trendColor(trend: (totalValue >= totalCost), trendStyle: trendStyle))
                         }
                     }
                 }
@@ -100,7 +73,7 @@ struct PositionTabView: View {
 
                 Chart(positions) { position in
                     SectorMark(
-                        angle: .value("Assert", calcluateValue(position: position)),
+                        angle: .value("Assert", position.getValue(selectedCurrency: selectedCurrency, twdusd: twdusd)),
                         innerRadius: .ratio(0.625),
                         angularInset: 1.5
                     )
@@ -147,7 +120,7 @@ struct PositionTabView: View {
                                                 .scaledToFill()
                                                 .cornerRadius(100)
                                         } placeholder: {
-                                            ProgressView()
+                                            // ProgressView()
                                         }.frame(width: 30.0, height: 30.0)
 
                                         VStack(alignment: .leading) {
@@ -157,8 +130,16 @@ struct PositionTabView: View {
                                                 .foregroundColor(.secondary)
                                         }
                                         Spacer()
-                                        Text(position.current * position.quantity, format: Decimal.FormatStyle.Currency(code: "TWD"))
-                                            .foregroundColor(position.current * position.quantity >= position.cost ? trendColor[trendStyle ? 1 : 0][0] : trendColor[trendStyle ? 1 : 0][1])
+                                        Text(
+                                            position.getValue(selectedCurrency: selectedCurrency, twdusd: twdusd),
+                                            format: Decimal.FormatStyle.Currency(code: selectedCurrency.rawValue)
+                                        )
+                                            .foregroundColor(
+                                                trendColor(
+                                                    trend: (position.current * position.quantity >= position.cost),
+                                                    trendStyle: trendStyle
+                                                )
+                                            )
                                             .font(.system(size: 20, weight: .bold, design: Font.Design.rounded))
                                     }.onTapGesture {
                                         clickIndex = index
@@ -190,50 +171,48 @@ struct PositionTabView: View {
             }
         }
         .sheet(isPresented: $showDetail) {
-            StockDetailView(position: positions[clickIndex], trendStyle: $trendStyle)
+            StockDetailView(
+                position: positions[clickIndex],
+                trendStyle: $trendStyle
+            )
         }
         .sheet(isPresented: $showNew) {
             StockEditorView(position: PositionStruct(ticker: "", name: "", quantity: 0, cost: 0, color: "#0369A1"))
         }
     }
-    
+
     init(
         positions: Binding<[PositionStruct]>,
         twdusd: Binding<Decimal>,
+        selectedCurrency: Binding<CurrencyBase>,
         trendStyle: Binding<Bool>,
         API: PortfolioAPI = PortfolioAPI()
     ) {
         self.API = API
         self._twdusd = twdusd
+        self._selectedCurrency = selectedCurrency
         self._positions = positions
         self._trendStyle = trendStyle
     }
-    
-    func calcluateValue(position: PositionStruct) -> Decimal {
-        if position.ticker.rangeOfCharacter(from: .decimalDigits) != nil {
-            return position.current * position.quantity
-        } else {
-            return position.current * position.quantity * twdusd
-        }
-    }
-    
+
     private func findSelectedSector(value: Decimal) -> PositionStruct? {
         var accumulatedCount:Decimal = 0
      
         let position = positions.first { position in
-            accumulatedCount += calcluateValue(position: position)
+            accumulatedCount += position.getValue(selectedCurrency: selectedCurrency, twdusd: twdusd)
             return value <= accumulatedCount
         }
      
         return position
     }
-    
+
     private func calcSelectedPercent(position: PositionStruct) -> Float {
         var percent: Float
-        percent = Float(truncating: (calcluateValue(position: position) / totalValue) as NSNumber)
+        let value = position.getValue(selectedCurrency: selectedCurrency, twdusd: twdusd)
+        percent = Float(truncating: (value / totalValue) as NSNumber)
         return percent * 100
     }
-    
+
     func reload() {
         for index in positions.indices {
             API.getStock(ticker: positions[index].ticker) { [self] info in
@@ -262,5 +241,10 @@ var positions = [
 ]
 
 #Preview {
-    PositionTabView(positions: .constant(positions), twdusd: .constant(30), trendStyle: .constant(false))
+    PositionTabView(
+        positions: .constant(positions),
+        twdusd: .constant(30),
+        selectedCurrency: .constant(CurrencyBase.twd),
+        trendStyle: .constant(false)
+    )
 }
