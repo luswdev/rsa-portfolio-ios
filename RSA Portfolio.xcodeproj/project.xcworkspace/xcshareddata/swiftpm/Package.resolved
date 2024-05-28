@@ -1,0 +1,24 @@
+{
+  "originHash" : "c63ad86401287da52915c716d43c5cb4865f352a587cc73132a99f4a26077ef6",
+  "pins" : [
+    {
+      "identity" : "refresh",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/wxxsw/Refresh",
+      "state" : {
+        "revision" : "4b507f7c6f08f80d853b7ff052f4324a1279cdfe",
+        "version" : "0.2.0"
+      }
+    },
+    {
+      "identity" : "swiftui-pull-to-refresh",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/globulus/swiftui-pull-to-refresh",
+      "state" : {
+        "revision" : "1852a4eb7e7a12a768c64b25b1bd905993ced4eb",
+        "version" : "1.1.9"
+      }
+    }
+  ],
+  "version" : 3
+}
