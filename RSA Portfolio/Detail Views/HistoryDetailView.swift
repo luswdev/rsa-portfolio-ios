@@ -89,7 +89,7 @@ struct HistoryDetailView: View {
             .navigationTitle(history.date)
         }
         .sheet(isPresented: $showEdit) {
-            HistoryEditerView(history: history)
+            HistoryEditorView(history: history)
         }
     }
 
@@ -122,5 +122,3 @@ struct HistoryDetailView: View {
         historyIndex: 1
     )
 }
-
-

@@ -1,16 +1,16 @@
 //
-//  HistoryEditerView.swift
+//  StockEditerView.swift
 //  RSA Portfolio
 //
-//  Created by Skywalker on 2024/5/27.
+//  Created by Skywalker on 2024/5/26.
 //
 
 import Foundation
 import SwiftUI
 
-struct HistoryEditerView: View {
-    @State private var history: HistoryStruct
-    @State private var historyDate: Date
+struct StockEditorView: View {
+    @State private var position: PositionStruct
+    @State private var holdColor: Color
     
     @State private var showAlert = false
 
@@ -21,50 +21,46 @@ struct HistoryEditerView: View {
             Form {
                 Section {
                     HStack {
-                        DatePicker("Record Month", selection: $historyDate, displayedComponents: [.date])
-                    }
-                }
-                Section(header: Text("Taiwan")) {
-                    HStack {
-                        Text("Cost")
+                        Text("Symbol")
                             .frame(width: 75, alignment: .leading)
-                        TextField("0", value: $history.tw.cost, format: .number)
-                            .keyboardType(.decimalPad)
+                        TextField("QQQ", text: $position.ticker)
                             .autocapitalization(.none)
                     }
                     HStack {
-                        Text("Balance")
+                        Text("Name")
                             .frame(width: 75, alignment: .leading)
-                        TextField("0", value: $history.tw.balance, format: .number)
-                            .keyboardType(.decimalPad)
+                        TextField("Invesco QQQ Trust", text: $position.name)
                             .autocapitalization(.none)
                     }
                 }
-                Section(header: Text("United State")) {
+                Section {
                     HStack {
-                        Text("Cost")
+                        Text("Quantity")
                             .frame(width: 75, alignment: .leading)
-                        TextField("0", value: $history.us.cost, format: .number)
+                        TextField("0", value: $position.quantity, format: .number)
                             .keyboardType(.decimalPad)
                             .autocapitalization(.none)
                     }
                     HStack {
-                        Text("Balance")
+                        Text("Cost")
                             .frame(width: 75, alignment: .leading)
-                        TextField("0", value: $history.us.balance, format: .number)
+                        TextField("0", value: $position.cost, format: .number)
                             .keyboardType(.decimalPad)
                             .autocapitalization(.none)
                     }
                 }
                 Section {
+                    ColorPicker("Stock Color", selection: $holdColor)
+                }
+                Section {
                     Button(
                         action: {
-                            history.date = date2str(date: historyDate)
-                            
-                            if history.date == "" || history.tw.cost == 0 || history.tw.balance == 0 || history.us.cost == 0 || history.us.balance == 0 {
+                            if position.ticker == "" || position.name == "" || position.quantity == 0 || position.cost == 0 {
                                 showAlert = true
                                 return
                             }
+                            
+                            position.color = color2hex(color: holdColor)
                             
                             presentationMode.wrappedValue.dismiss()
                         },
@@ -81,7 +77,7 @@ struct HistoryEditerView: View {
         }
         .alert(isPresented: $showAlert) {
             Alert(
-                title: Text("Record Information Incorrect"),
+                title: Text("Hold Information Incorrect"),
                 message: Text("Please filled in all information."),
                 dismissButton: .cancel(Text("OK"))
             )
@@ -89,16 +85,13 @@ struct HistoryEditerView: View {
     }
 
     init(
-        history: HistoryStruct
+        position: PositionStruct
     ) {
-        self.history = history
-        self.historyDate = str2date(dateString: history.date)
+        self.position = position
+        self.holdColor = hex2color(hex: position.color) ?? Color("Main")
     }
 }
 
 #Preview {
-    HistoryEditerView(
-        history: HistoryStruct(date: "May 2024", usCost: 900, usBalance: 904.86, twCost: 43381, twBalance: 43880.00))
+    StockEditorView(position: PositionStruct(ticker: "", name: "", quantity: 0.66656, cost: 300, color: "#5E35B1"))
 }
-
-

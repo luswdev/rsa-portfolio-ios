@@ -33,22 +33,7 @@ struct PositionStruct: Identifiable {
     }
 }
 
-struct PositionRowView: View {
-    var position: PositionStruct
-    var body: some View {
-        ScrollView(.horizontal) {
-            HStack {
-                Text(position.ticker).foregroundStyle(.secondary)
-                Text(position.current, format: Decimal.FormatStyle.Currency(code: "USD"))
-                Text(position.quantity, format: Decimal.FormatStyle.Percent())
-                Text(position.cost, format: Decimal.FormatStyle.Currency(code: "USD"))
-                Text(position.current * position.quantity, format: Decimal.FormatStyle.Currency(code: "USD"))
-            }
-        }
-    }
-}
-
-struct PositionView: View {
+struct PositionTabView: View {
     var API: PortfolioAPI
     
     @State private var showDetail = false
@@ -208,7 +193,7 @@ struct PositionView: View {
             StockDetailView(position: positions[clickIndex], trendStyle: $trendStyle)
         }
         .sheet(isPresented: $showNew) {
-            StockEditerView(position: PositionStruct(ticker: "", name: "", quantity: 0, cost: 0, color: "#0369A1"))
+            StockEditorView(position: PositionStruct(ticker: "", name: "", quantity: 0, cost: 0, color: "#0369A1"))
         }
     }
     
@@ -277,5 +262,5 @@ var positions = [
 ]
 
 #Preview {
-    PositionView(positions: .constant(positions), twdusd: .constant(30), trendStyle: .constant(false))
+    PositionTabView(positions: .constant(positions), twdusd: .constant(30), trendStyle: .constant(false))
 }

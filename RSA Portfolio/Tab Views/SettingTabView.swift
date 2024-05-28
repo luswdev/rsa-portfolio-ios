@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct SettingView: View {
+struct SettingTabView: View {
     var API: PortfolioAPI
     
     @Binding private var isNeedLogin: Bool
@@ -104,7 +104,7 @@ struct SettingView: View {
 }
 
 #Preview {
-    SettingView(
+    SettingTabView(
         isNeedLogin: .constant(false),
         faceIdEn: .constant(false),
         loginAccount: .constant(""),
@@ -113,4 +113,3 @@ struct SettingView: View {
         selectedCurrency: .constant(CurrencyBase.twd)
     )
 }
-

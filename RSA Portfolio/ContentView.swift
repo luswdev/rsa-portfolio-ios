@@ -29,15 +29,15 @@ struct ContentView: View {
 
     var body: some View {
         TabView {
-            PositionView(positions: $positions, twdusd: $twdusd, trendStyle: $trendStyle, API: API)
+            PositionTabView(positions: $positions, twdusd: $twdusd, trendStyle: $trendStyle, API: API)
                 .tabItem {
                     Label("Positions", systemImage: "tray.full.fill")
                 }
-            HistoryView(histories: histories, twdusd: $twdusd)
+            HistoryTabView(histories: histories, twdusd: $twdusd)
                 .tabItem {
                     Label("Histories", systemImage: "clock")
                 }
-            SettingView(
+            SettingTabView(
                 isNeedLogin: $isNeedLogin,
                 faceIdEn: $faceIdEn,
                 loginAccount: $loginAccount,
@@ -50,7 +50,7 @@ struct ContentView: View {
         }
         .accentColor(Color("Main"))
         .fullScreenCover(isPresented: self.$isNeedLogin) {
-            LoginView(
+            LoginTabView(
                 isNeedLogin: $isNeedLogin,
                 faceIdEn: $faceIdEn,
                 loginAccount: $loginAccount,

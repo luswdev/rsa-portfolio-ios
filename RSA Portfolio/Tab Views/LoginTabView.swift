@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import LocalAuthentication
 
-struct LoginView: View {
+struct LoginTabView: View {
     var API: PortfolioAPI
 
     @Binding var isNeedLogin: Bool
@@ -186,7 +186,7 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView(
+    LoginTabView(
         isNeedLogin: .constant(false),
         faceIdEn: .constant(false),
         loginAccount: .constant(""),

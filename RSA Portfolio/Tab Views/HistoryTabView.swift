@@ -101,7 +101,7 @@ struct RoundedCorners: Shape {
     }
 }
 
-struct HistoryView: View {
+struct HistoryTabView: View {
     var histories: [HistoryStruct]
     
     @Binding private var twdusd: Decimal
@@ -301,7 +301,7 @@ struct HistoryView: View {
             HistoryDetailView(twdusd: twdusd, history: histories[clickIndex], historyIndex: clickIndex)
         }
         .sheet(isPresented: $showEdit) {
-            HistoryEditerView(history: HistoryStruct(date: "", usCost: 0, usBalance: 0, twCost: 0, twBalance: 0))
+            HistoryEditorView(history: HistoryStruct(date: "", usCost: 0, usBalance: 0, twCost: 0, twBalance: 0))
         }
     }
     
@@ -345,5 +345,5 @@ var histories = [
 ]
 
 #Preview {
-    HistoryView(twdusd: .constant(30))
+    HistoryTabView(twdusd: .constant(30))
 }

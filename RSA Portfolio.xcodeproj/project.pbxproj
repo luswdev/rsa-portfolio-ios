@@ -14,20 +14,19 @@
 		9048E1A22C01EA5A004B856A /* RSA_PortfolioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9048E1A12C01EA5A004B856A /* RSA_PortfolioTests.swift */; };
 		9048E1AC2C01EA5A004B856A /* RSA_PortfolioUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9048E1AB2C01EA5A004B856A /* RSA_PortfolioUITests.swift */; };
 		9048E1AE2C01EA5A004B856A /* RSA_PortfolioUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9048E1AD2C01EA5A004B856A /* RSA_PortfolioUITestsLaunchTests.swift */; };
-		9048E1BB2C01F0A2004B856A /* PositionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9048E1BA2C01F0A2004B856A /* PositionView.swift */; };
-		9048E1BD2C01F7BB004B856A /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9048E1BC2C01F7BB004B856A /* HistoryView.swift */; };
-		9048E1BF2C01F931004B856A /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9048E1BE2C01F931004B856A /* SettingView.swift */; };
+		9048E1BB2C01F0A2004B856A /* PositionTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9048E1BA2C01F0A2004B856A /* PositionTabView.swift */; };
+		9048E1BD2C01F7BB004B856A /* HistoryTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9048E1BC2C01F7BB004B856A /* HistoryTabView.swift */; };
+		9048E1BF2C01F931004B856A /* SettingTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9048E1BE2C01F931004B856A /* SettingTabView.swift */; };
 		9048E1C12C02047B004B856A /* PortfolioAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9048E1C02C02047B004B856A /* PortfolioAPI.swift */; };
-		9048E1C32C020587004B856A /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9048E1C22C020587004B856A /* LoginView.swift */; };
+		9048E1C32C020587004B856A /* LoginTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9048E1C22C020587004B856A /* LoginTabView.swift */; };
 		9048E1C52C025F5E004B856A /* StockDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9048E1C42C025F5E004B856A /* StockDetailView.swift */; };
 		9048E1C72C0272EA004B856A /* ExtensionColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9048E1C62C0272EA004B856A /* ExtensionColor.swift */; };
 		9048E1CE2C027C06004B856A /* RefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9048E1CD2C027C06004B856A /* RefreshView.swift */; };
 		9048E1D12C027D79004B856A /* SwiftUIPullToRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 9048E1D02C027D79004B856A /* SwiftUIPullToRefresh */; };
 		9048E1D32C03369A004B856A /* HistoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9048E1D22C03369A004B856A /* HistoryDetailView.swift */; };
-		9048E1D52C039142004B856A /* StockEditerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9048E1D42C039142004B856A /* StockEditerView.swift */; };
-		9048E1D72C039A8A004B856A /* HistoryEditerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9048E1D62C039A8A004B856A /* HistoryEditerView.swift */; };
+		9048E1D52C039142004B856A /* StockEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9048E1D42C039142004B856A /* StockEditorView.swift */; };
+		9048E1D72C039A8A004B856A /* HistoryEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9048E1D62C039A8A004B856A /* HistoryEditorView.swift */; };
 		9048E1D92C039C03004B856A /* ExtensionDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9048E1D82C039C03004B856A /* ExtensionDate.swift */; };
-		90ACC7CF2C04EDDF00AFA912 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90ACC7CE2C04EDDF00AFA912 /* UserDefaults.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,19 +57,18 @@
 		9048E1A72C01EA5A004B856A /* RSA PortfolioUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RSA PortfolioUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9048E1AB2C01EA5A004B856A /* RSA_PortfolioUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSA_PortfolioUITests.swift; sourceTree = "<group>"; };
 		9048E1AD2C01EA5A004B856A /* RSA_PortfolioUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSA_PortfolioUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		9048E1BA2C01F0A2004B856A /* PositionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionView.swift; sourceTree = "<group>"; };
-		9048E1BC2C01F7BB004B856A /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
-		9048E1BE2C01F931004B856A /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		9048E1BA2C01F0A2004B856A /* PositionTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionTabView.swift; sourceTree = "<group>"; };
+		9048E1BC2C01F7BB004B856A /* HistoryTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTabView.swift; sourceTree = "<group>"; };
+		9048E1BE2C01F931004B856A /* SettingTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTabView.swift; sourceTree = "<group>"; };
 		9048E1C02C02047B004B856A /* PortfolioAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioAPI.swift; sourceTree = "<group>"; };
-		9048E1C22C020587004B856A /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		9048E1C22C020587004B856A /* LoginTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTabView.swift; sourceTree = "<group>"; };
 		9048E1C42C025F5E004B856A /* StockDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockDetailView.swift; sourceTree = "<group>"; };
 		9048E1C62C0272EA004B856A /* ExtensionColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionColor.swift; sourceTree = "<group>"; };
 		9048E1CD2C027C06004B856A /* RefreshView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshView.swift; sourceTree = "<group>"; };
 		9048E1D22C03369A004B856A /* HistoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetailView.swift; sourceTree = "<group>"; };
-		9048E1D42C039142004B856A /* StockEditerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockEditerView.swift; sourceTree = "<group>"; };
-		9048E1D62C039A8A004B856A /* HistoryEditerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryEditerView.swift; sourceTree = "<group>"; };
+		9048E1D42C039142004B856A /* StockEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockEditorView.swift; sourceTree = "<group>"; };
+		9048E1D62C039A8A004B856A /* HistoryEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryEditorView.swift; sourceTree = "<group>"; };
 		9048E1D82C039C03004B856A /* ExtensionDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDate.swift; sourceTree = "<group>"; };
-		90ACC7CE2C04EDDF00AFA912 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		90ACC7D02C04F91C00AFA912 /* RSA-Portfolio-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "RSA-Portfolio-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -123,22 +121,13 @@
 		9048E18F2C01EA59004B856A /* RSA Portfolio */ = {
 			isa = PBXGroup;
 			children = (
+				90EEA2672C057249000740E0 /* Tab Views */,
+				90EEA2692C05726A000740E0 /* Detail Views */,
+				90EEA26A2C057287000740E0 /* Editor Views */,
+				90EEA26B2C05741E000740E0 /* Utility */,
 				90ACC7D02C04F91C00AFA912 /* RSA-Portfolio-Info.plist */,
 				9048E1902C01EA59004B856A /* RSA_PortfolioApp.swift */,
-				9048E1C62C0272EA004B856A /* ExtensionColor.swift */,
-				9048E1D82C039C03004B856A /* ExtensionDate.swift */,
-				9048E1CD2C027C06004B856A /* RefreshView.swift */,
-				90ACC7CE2C04EDDF00AFA912 /* UserDefaults.swift */,
-				9048E1D42C039142004B856A /* StockEditerView.swift */,
 				9048E1922C01EA59004B856A /* ContentView.swift */,
-				9048E1C42C025F5E004B856A /* StockDetailView.swift */,
-				9048E1D22C03369A004B856A /* HistoryDetailView.swift */,
-				9048E1C22C020587004B856A /* LoginView.swift */,
-				9048E1BE2C01F931004B856A /* SettingView.swift */,
-				9048E1D62C039A8A004B856A /* HistoryEditerView.swift */,
-				9048E1C02C02047B004B856A /* PortfolioAPI.swift */,
-				9048E1BA2C01F0A2004B856A /* PositionView.swift */,
-				9048E1BC2C01F7BB004B856A /* HistoryView.swift */,
 				9048E1942C01EA5A004B856A /* Assets.xcassets */,
 				9048E1962C01EA5A004B856A /* Preview Content */,
 			);
@@ -168,6 +157,46 @@
 				9048E1AD2C01EA5A004B856A /* RSA_PortfolioUITestsLaunchTests.swift */,
 			);
 			path = "RSA PortfolioUITests";
+			sourceTree = "<group>";
+		};
+		90EEA2672C057249000740E0 /* Tab Views */ = {
+			isa = PBXGroup;
+			children = (
+				9048E1BE2C01F931004B856A /* SettingTabView.swift */,
+				9048E1BA2C01F0A2004B856A /* PositionTabView.swift */,
+				9048E1C22C020587004B856A /* LoginTabView.swift */,
+				9048E1BC2C01F7BB004B856A /* HistoryTabView.swift */,
+			);
+			path = "Tab Views";
+			sourceTree = "<group>";
+		};
+		90EEA2692C05726A000740E0 /* Detail Views */ = {
+			isa = PBXGroup;
+			children = (
+				9048E1D22C03369A004B856A /* HistoryDetailView.swift */,
+				9048E1C42C025F5E004B856A /* StockDetailView.swift */,
+			);
+			path = "Detail Views";
+			sourceTree = "<group>";
+		};
+		90EEA26A2C057287000740E0 /* Editor Views */ = {
+			isa = PBXGroup;
+			children = (
+				9048E1D62C039A8A004B856A /* HistoryEditorView.swift */,
+				9048E1D42C039142004B856A /* StockEditorView.swift */,
+			);
+			path = "Editor Views";
+			sourceTree = "<group>";
+		};
+		90EEA26B2C05741E000740E0 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				9048E1D82C039C03004B856A /* ExtensionDate.swift */,
+				9048E1C62C0272EA004B856A /* ExtensionColor.swift */,
+				9048E1C02C02047B004B856A /* PortfolioAPI.swift */,
+				9048E1CD2C027C06004B856A /* RefreshView.swift */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -307,20 +336,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9048E1D52C039142004B856A /* StockEditerView.swift in Sources */,
+				9048E1D52C039142004B856A /* StockEditorView.swift in Sources */,
 				9048E1932C01EA59004B856A /* ContentView.swift in Sources */,
-				9048E1C32C020587004B856A /* LoginView.swift in Sources */,
+				9048E1C32C020587004B856A /* LoginTabView.swift in Sources */,
 				9048E1C72C0272EA004B856A /* ExtensionColor.swift in Sources */,
 				9048E1C52C025F5E004B856A /* StockDetailView.swift in Sources */,
 				9048E1D32C03369A004B856A /* HistoryDetailView.swift in Sources */,
-				9048E1BF2C01F931004B856A /* SettingView.swift in Sources */,
-				9048E1BD2C01F7BB004B856A /* HistoryView.swift in Sources */,
+				9048E1BF2C01F931004B856A /* SettingTabView.swift in Sources */,
+				9048E1BD2C01F7BB004B856A /* HistoryTabView.swift in Sources */,
 				9048E1CE2C027C06004B856A /* RefreshView.swift in Sources */,
 				9048E1D92C039C03004B856A /* ExtensionDate.swift in Sources */,
 				9048E1C12C02047B004B856A /* PortfolioAPI.swift in Sources */,
-				90ACC7CF2C04EDDF00AFA912 /* UserDefaults.swift in Sources */,
-				9048E1D72C039A8A004B856A /* HistoryEditerView.swift in Sources */,
-				9048E1BB2C01F0A2004B856A /* PositionView.swift in Sources */,
+				9048E1D72C039A8A004B856A /* HistoryEditorView.swift in Sources */,
+				9048E1BB2C01F0A2004B856A /* PositionTabView.swift in Sources */,
 				9048E1912C01EA59004B856A /* RSA_PortfolioApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

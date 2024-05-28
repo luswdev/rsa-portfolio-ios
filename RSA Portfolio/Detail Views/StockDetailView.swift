@@ -100,7 +100,7 @@ struct StockDetailView: View {
             .navigationTitle(position.name)
         }
         .sheet(isPresented: $showEdit) {
-            StockEditerView(position: position)
+            StockEditorView(position: position)
         }
     }
 
@@ -116,5 +116,3 @@ struct StockDetailView: View {
 #Preview {
     StockDetailView(position: PositionStruct(ticker: "QQQ", name: "Invesco QQQ Trust", quantity: 0.66656, cost: 300, color: "#26a69a"), trendStyle: .constant(false))
 }
-
-
