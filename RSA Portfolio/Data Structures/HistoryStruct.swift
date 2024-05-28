@@ -7,10 +7,12 @@
 
 import Foundation
 
-struct HistoryStruct: Identifiable {
+struct HistoryStruct: Identifiable, Equatable {
     let id = UUID()
 
-    struct SubHistory: Hashable {
+    struct SubHistory: Identifiable, Equatable {
+        let id = UUID()
+
         var cost: Decimal
         var balance: Decimal
         var currency: CurrencyBase

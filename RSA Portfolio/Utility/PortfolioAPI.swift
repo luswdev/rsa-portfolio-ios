@@ -19,8 +19,13 @@ struct PortfolioAPI {
     }
     
     struct PortfolioJson: Codable {
-        let assert: [PositionJson]
-        let portfolio: [HistoryJson]
+        var assert: [PositionJson]
+        var portfolio: [HistoryJson]
+        
+        init () {
+            self.assert = [PositionJson]()
+            self.portfolio = [HistoryJson]()
+        }
     }
 
     struct PositionJson: Codable {
@@ -32,17 +37,39 @@ struct PortfolioAPI {
         let quantity: Decimal
         let ticker: String
         let updated: Bool
+        
+        init (position: PositionStruct) {
+            self.color = position.color
+            self.cost = position.cost
+            self.current = position.current
+            self.last = position.last
+            self.name = position.name
+            self.quantity = position.quantity
+            self.ticker = position.ticker
+            self.updated = true
+        }
     }
 
     struct HistoryJson: Codable {
         let date: String
         let tw: SubHistoryJson
         let us: SubHistoryJson
+        
+        init (history: HistoryStruct) {
+            self.date = history.date
+            self.tw = SubHistoryJson(subHistory: history.tw)
+            self.us = SubHistoryJson(subHistory: history.us)
+        }
     }
 
     struct SubHistoryJson: Codable {
         let cost: Decimal
         let value: Decimal
+        
+        init (subHistory: HistoryStruct.SubHistory) {
+            self.cost = subHistory.cost
+            self.value = subHistory.balance
+        }
     }
     
     let API_BASE = "https://fin.lusw.dev"
@@ -126,7 +153,6 @@ struct PortfolioAPI {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         
-        
         let task = session.dataTask(with: request) { (data, response, error) in
             guard error == nil else {
                 completion(nil)
@@ -138,8 +164,6 @@ struct PortfolioAPI {
                 return
             }
             
-            print(String(data: data, encoding: .utf8)!)
-            
             if let tickerInfo = tickerJsonDecoder(jsonString: String(data: data, encoding: .utf8)!) {
                 completion(tickerInfo)
             } else {
@@ -147,7 +171,6 @@ struct PortfolioAPI {
             }
         }
         task.resume()
-        
     }
     
     func getCurrency(ticker: String, completion: @escaping (TickerInfo?) -> Void) {
@@ -160,7 +183,6 @@ struct PortfolioAPI {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         
-        
         let task = session.dataTask(with: request) { (data, response, error) in
             guard error == nil else {
                 completion(nil)
@@ -172,8 +194,6 @@ struct PortfolioAPI {
                 return
             }
             
-            print(String(data: data, encoding: .utf8)!)
-            
             if let tickerInfo = tickerJsonDecoder(jsonString: String(data: data, encoding: .utf8)!) {
                 completion(tickerInfo)
             } else {
@@ -181,7 +201,53 @@ struct PortfolioAPI {
             }
         }
         task.resume()
+    }
+    
+    func uploadPortfolio(portfolio: PortfolioSet, completion: @escaping (Bool) -> Void) {
+        var json = PortfolioJson()
+        for position in portfolio.positions {
+            json.assert.append(PositionJson(position: position))
+        }
         
+        for history in portfolio.histories {
+            json.portfolio.append(HistoryJson(history: history))
+        }
+        
+        let url = URL(string: self.API_BASE + "/config")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        do {
+            let encoder = JSONEncoder()
+            let jsonData = try encoder.encode(json)
+            request.httpBody = jsonData
+        } catch {
+            print("Error encoding JSON: \(error)")
+            return
+        }
+
+        let task = session.dataTask(with: request) { (data, response, error) in
+            guard error == nil else {
+                completion(false)
+                return
+            }
+               
+            guard let data = data else {
+                completion(false)
+                return
+            }
+            
+            let json = try? JSONSerialization.jsonObject(with: data, options: [])
+            if let dictionary = json as? [String: Any],
+               let status = dictionary["status"] as? String,
+               status == "success" {
+                completion(true)
+            } else {
+                completion(false)
+            }
+        }
+        task.resume()
     }
     
     func portfolioJsonDecoder(jsonString: String) -> (positions: [PositionStruct], histories: [HistoryStruct])? {
@@ -199,14 +265,9 @@ struct PortfolioAPI {
             }
             
             for portfolio in decodedData.portfolio {
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM"
-
-                let date = dateFormatter.date(from: portfolio.date)!
-                dateFormatter.dateFormat = "MMM yyy"
-                
+                let date = str2date(dateString: portfolio.date)
                 historyStruct.append(
-                    HistoryStruct(date: dateFormatter.string(from: date), usCost: portfolio.us.cost, usBalance: portfolio.us.value, twCost: portfolio.tw.cost, twBalance: portfolio.tw.value)
+                    HistoryStruct(date: date2str(date: date), usCost: portfolio.us.cost, usBalance: portfolio.us.value, twCost: portfolio.tw.cost, twBalance: portfolio.tw.value)
                 )
             }
             

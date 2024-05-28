@@ -16,7 +16,7 @@ func str2date(dateString: String) -> Date {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "MMM yyyy"
 
-    let date = dateFormatter.date(from: dateString)!
+    let date = dateFormatter.date(from: dateString) ?? Date.now
     return date
 }
 

@@ -10,15 +10,37 @@ import SwiftUI
 import Charts
 
 struct HistoryTabView: View {
-    var histories: [HistoryStruct]
+    @Binding private var histories: [HistoryStruct]
     
     @Binding private var twdusd: Decimal
     
     @State private var showDetail = false
     @State private var showEdit = false
     @State private var clickIndex: Int = 0
+    @State private var showIndex: Int = 0
+
+    @State private var newRecord: HistoryStruct = HistoryStruct(date: "", usCost: 0, usBalance: 0, twCost: 0, twBalance: 0)
     
     @State private var pickedMarket: [HistoryStruct.SubHistory]
+    @State private var selectedMarket: Int = 0
+    
+    @Binding private var needUpload: Bool
+    @State private var editSuccess: Bool = false
+    
+    var pickedMarkets: [[HistoryStruct.SubHistory]] {
+        [
+            histories.map(\.tw),
+            histories.map(\.us),
+            histories.map {
+                HistoryStruct.SubHistory(
+                    cost: $0.tw.getCost(selectedCurrency: selectedCurrency, twdusd: twdusd) + $0.us.getCost(selectedCurrency: selectedCurrency, twdusd: twdusd),
+                    balance: $0.tw.getBalance(selectedCurrency: selectedCurrency, twdusd: twdusd) + $0.us.getBalance(selectedCurrency: selectedCurrency, twdusd: twdusd),
+                    currency: selectedCurrency
+                )
+            }
+        ]
+    }
+    
     var pickerMarketBalanceMin: Decimal {
         pickedMarket.count != 0 ?
         pickedMarket.map { $0.getBalance(selectedCurrency: selectedCurrency, twdusd: twdusd) } .min()! : 0
@@ -57,16 +79,13 @@ struct HistoryTabView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Picker("History Market", selection: $pickedMarket) {
-                    Text("Taiwan").tag(histories.map { $0.tw })
-                    Text("United State").tag(histories.map { $0.us })
-                    Text("Total").tag(histories.map {
-                        HistoryStruct.SubHistory(
-                            cost: $0.tw.getCost(selectedCurrency: selectedCurrency, twdusd: twdusd) + $0.us.getCost(selectedCurrency: selectedCurrency, twdusd: twdusd),
-                            balance: $0.tw.getBalance(selectedCurrency: selectedCurrency, twdusd: twdusd) + $0.us.getBalance(selectedCurrency: selectedCurrency, twdusd: twdusd),
-                            currency: selectedCurrency
-                        )
-                    })
+                Picker("History Market", selection: $selectedMarket) {
+                    Text("Taiwan").tag(0)
+                    Text("United States").tag(1)
+                    Text("Total").tag(2)
+                }
+                .onChange(of: selectedMarket) {
+                    updatePickedMarket()
                 }
                 .padding(.horizontal)
                 .padding(.top)
@@ -173,7 +192,7 @@ struct HistoryTabView: View {
                 .chartYScale(domain: pickerMarketBalanceDomain)
                 .padding(.horizontal)
 
-                Form {
+                List {
                     Section(header: Text("History")) {
                         ForEach (Array(histories.enumerated()), id: \.offset) { index, history in
                             HStack {
@@ -186,14 +205,24 @@ struct HistoryTabView: View {
                                     .font(.system(size: 20, weight: .bold, design: Font.Design.rounded))
                             }.onTapGesture {
                                 clickIndex = index
-                                showDetail = true
                             }
                         }
+                        .onDelete(perform: { offsets in
+                            histories.remove(atOffsets: offsets)
+                            updatePickedMarket()
+                            needUpload = true
+                        })
+                        .onMove(perform: { fromIdx, toIdx in
+                            histories.move(fromOffsets: fromIdx, toOffset: toIdx)
+                            updatePickedMarket()
+                            needUpload = true
+                        })
                     }
                 }
             }
             .toolbar {
                 Button {
+                    newRecord = HistoryStruct(date: "", usCost: 0, usBalance: 0, twCost: 0, twBalance: 0)
                     showEdit = true
                } label: {
                    HStack {
@@ -206,30 +235,51 @@ struct HistoryTabView: View {
                }
                .buttonStyle(.plain)
             }
+            .onChange(of: clickIndex) {
+                showIndex = clickIndex
+                showDetail = true
+            }
             .navigationTitle("Histories")
         }
         .sheet(isPresented: self.$showDetail) {
             HistoryDetailView(
                 twdusd: twdusd,
                 selectedCurrency: $selectedCurrency,
-                history: histories[clickIndex],
-                historyIndex: clickIndex
+                history: $histories[clickIndex],
+                historyIndex: clickIndex,
+                needUpload: $needUpload
             )
         }
-        .sheet(isPresented: $showEdit) {
-            HistoryEditorView(history: HistoryStruct(date: "", usCost: 0, usBalance: 0, twCost: 0, twBalance: 0))
+        .sheet(isPresented: $showEdit, onDismiss: {
+            if !editSuccess {
+                return
+            }
+            editSuccess = true
+            
+            histories.append(newRecord)
+            updatePickedMarket()
+            needUpload = true
+        }) {
+            HistoryEditorView(history: $newRecord, editSuccess: $editSuccess)
         }
     }
     
     init(
-        histories: [HistoryStruct] = [HistoryStruct](),
+        histories:  Binding<[HistoryStruct]>,
         twdusd: Binding<Decimal>,
-        selectedCurrency: Binding<CurrencyBase>
+        selectedCurrency: Binding<CurrencyBase>,
+        needUpload: Binding<Bool>
     ) {
-        self.histories = histories
-        self.pickedMarket = histories.map { $0.tw }
+        self._histories = histories
+        self.pickedMarket = histories.wrappedValue.map { $0.tw }
         self._twdusd = twdusd
         self._selectedCurrency = selectedCurrency
+        self._needUpload = needUpload
+    }
+    
+    
+    private func updatePickedMarket() {
+        pickedMarket = pickedMarkets[selectedMarket]
     }
     
     private func findSelectedSector(value: Date) -> HistoryStruct? {
@@ -264,8 +314,9 @@ var histories = [
 
 #Preview {
     HistoryTabView(
-        histories: histories,
+        histories: .constant(histories),
         twdusd: .constant(30),
-        selectedCurrency: .constant(CurrencyBase.usd)
+        selectedCurrency: .constant(CurrencyBase.usd),
+        needUpload: .constant(false)
     )
 }

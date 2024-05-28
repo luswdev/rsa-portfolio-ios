@@ -26,6 +26,8 @@ struct ContentView: View {
     @State private var twdusd: Decimal
     @State private var trendStyle: Bool = UserDefaults.standard.bool(forKey: "TrendStyle")
     @State private var selectedCurrency: CurrencyBase = (CurrencyBase(rawValue: UserDefaults.standard.string(forKey: "SelectedCurrency") ?? "TWD") ?? CurrencyBase.twd)
+    
+    @State private var needUpload: Bool = false
 
     var body: some View {
         TabView {
@@ -40,9 +42,10 @@ struct ContentView: View {
             }
 
             HistoryTabView(
-                histories: histories,
+                histories: $histories,
                 twdusd: $twdusd,
-                selectedCurrency: $selectedCurrency
+                selectedCurrency: $selectedCurrency,
+                needUpload: $needUpload
             ).tabItem {
                 Label("Histories", systemImage: "clock")
             }
@@ -56,6 +59,15 @@ struct ContentView: View {
                 selectedCurrency: $selectedCurrency
             ).tabItem {
                 Label("Setting", systemImage: "gear")
+            }
+        }
+        .onChange(of: needUpload) {
+            if needUpload {
+                API.uploadPortfolio(
+                    portfolio: PortfolioAPI.PortfolioSet(positions: positions, histories: histories)
+                ) { success in
+                    needUpload = false
+                }
             }
         }
         .accentColor(Color("Main"))

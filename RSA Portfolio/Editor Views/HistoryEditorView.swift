@@ -9,7 +9,8 @@ import Foundation
 import SwiftUI
 
 struct HistoryEditorView: View {
-    @State private var history: HistoryStruct
+    @Binding private var history: HistoryStruct
+    @Binding private var editSuccess: Bool
     @State private var historyDate: Date
     
     @State private var showAlert = false
@@ -66,6 +67,7 @@ struct HistoryEditorView: View {
                                 return
                             }
                             
+                            editSuccess = true
                             presentationMode.wrappedValue.dismiss()
                         },
                         label: {
@@ -89,14 +91,20 @@ struct HistoryEditorView: View {
     }
 
     init(
-        history: HistoryStruct
+        history: Binding<HistoryStruct>,
+        editSuccess: Binding<Bool>
     ) {
-        self.history = history
-        self.historyDate = str2date(dateString: history.date)
+        self._history = history
+        self.historyDate = str2date(dateString: history.date.wrappedValue)
+        self._editSuccess = editSuccess
     }
 }
 
 #Preview {
     HistoryEditorView(
-        history: HistoryStruct(date: "May 2024", usCost: 900, usBalance: 904.86, twCost: 43381, twBalance: 43880.00))
+        history: .constant(
+                    HistoryStruct(date: "May 2024", usCost: 900, usBalance: 904.86, twCost: 43381, twBalance: 43880.00)
+                ),
+        editSuccess: .constant(false)
+    )
 }

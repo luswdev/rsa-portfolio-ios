@@ -10,12 +10,16 @@ import SwiftUI
 
 struct HistoryDetailView: View {
     var twdusd: Decimal
-    var history: HistoryStruct
+    @Binding private var history: HistoryStruct
+    var dummyHistories: HistoryStruct
     var historyIndex: Int
 
     @Binding private var selectedCurrency: CurrencyBase
 
+    @State private var editSuccess: Bool = false
     @State private var showEdit = false
+    
+    @Binding private var needUpload: Bool
 
     var body: some View {
         NavigationView {
@@ -90,21 +94,32 @@ struct HistoryDetailView: View {
             }
             .navigationTitle(history.date)
         }
-        .sheet(isPresented: $showEdit) {
-            HistoryEditorView(history: history)
+        .sheet(isPresented: $showEdit, onDismiss: {
+            if !editSuccess {
+                history = dummyHistories
+                return
+            }
+            editSuccess = true
+            needUpload = true
+        }) {
+            HistoryEditorView(history: $history, editSuccess: $editSuccess)
         }
     }
 
     init(
         twdusd: Decimal,
         selectedCurrency: Binding<CurrencyBase>,
-        history: HistoryStruct,
-        historyIndex: Int
+        history: Binding<HistoryStruct>,
+        historyIndex: Int,
+        needUpload: Binding<Bool>
     ) {
         self.twdusd = twdusd
         self._selectedCurrency = selectedCurrency
-        self.history = history
+        self._history = history
         self.historyIndex = historyIndex
+        self._needUpload = needUpload
+        
+        self.dummyHistories = history.wrappedValue
     }
     
     
@@ -123,7 +138,8 @@ struct HistoryDetailView: View {
     HistoryDetailView(
         twdusd: 30,
         selectedCurrency: .constant(CurrencyBase.usd),
-        history: HistoryStruct(date: "May 2024", usCost: 900, usBalance: 904.86, twCost: 43381, twBalance: 43880.00),
-        historyIndex: 1
+        history: .constant(HistoryStruct(date: "May 2024", usCost: 900, usBalance: 904.86, twCost: 43381, twBalance: 43880.00)),
+        historyIndex: 1,
+        needUpload: .constant(false)
     )
 }

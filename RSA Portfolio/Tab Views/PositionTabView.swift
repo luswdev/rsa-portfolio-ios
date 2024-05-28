@@ -17,6 +17,7 @@ struct PositionTabView: View {
     @State private var showDetail = false
     @State private var showNew = false
     @State private var clickIndex: Int = 0
+    @State private var showIndex: Int = 0
     @Binding private var trendStyle: Bool
     
     @State private var height1: CGFloat = .zero
@@ -143,7 +144,6 @@ struct PositionTabView: View {
                                             .font(.system(size: 20, weight: .bold, design: Font.Design.rounded))
                                     }.onTapGesture {
                                         clickIndex = index
-                                        showDetail = true
                                     }
                                 }
                             }
@@ -152,6 +152,10 @@ struct PositionTabView: View {
                     }
                 }
                 
+            }
+            .onChange(of: clickIndex) {
+                showIndex = clickIndex
+                showDetail = true
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             .navigationTitle("Positions")
