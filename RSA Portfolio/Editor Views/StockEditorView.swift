@@ -9,7 +9,8 @@ import Foundation
 import SwiftUI
 
 struct StockEditorView: View {
-    @State private var position: PositionStruct
+    @Binding private var position: PositionStruct
+    @Binding private var editSuccess: Bool
     @State private var holdColor: Color
     
     @State private var showAlert = false
@@ -62,6 +63,7 @@ struct StockEditorView: View {
                             
                             position.color = color2hex(color: holdColor)
                             
+                            editSuccess = true
                             presentationMode.wrappedValue.dismiss()
                         },
                         label: {
@@ -85,13 +87,18 @@ struct StockEditorView: View {
     }
 
     init(
-        position: PositionStruct
+        position: Binding<PositionStruct>,
+        editSuccess: Binding<Bool>
     ) {
-        self.position = position
-        self.holdColor = hex2color(hex: position.color) ?? Color("Main")
+        self._position = position
+        self.holdColor = hex2color(hex: position.wrappedValue.color) ?? Color("Main")
+        self._editSuccess = editSuccess
     }
 }
 
 #Preview {
-    StockEditorView(position: PositionStruct(ticker: "", name: "", quantity: 0.66656, cost: 300, color: "#5E35B1"))
+    StockEditorView(
+        position: .constant(PositionStruct(ticker: "", name: "", quantity: 0.66656, cost: 300, color: "#5E35B1")),
+        editSuccess: .constant(false)
+    )
 }

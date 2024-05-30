@@ -36,7 +36,8 @@ struct ContentView: View {
                 twdusd: $twdusd,
                 selectedCurrency: $selectedCurrency,
                 trendStyle: $trendStyle,
-                API: API
+                API: API,
+                needUpload: $needUpload
             ).tabItem {
                 Label("Positions", systemImage: "tray.full.fill")
             }

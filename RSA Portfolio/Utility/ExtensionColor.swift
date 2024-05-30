@@ -42,12 +42,16 @@ func color2hex(color: Color) -> String {
 
     var components: Color.Resolved?
     components = color.resolve(in: environment)
-    
+
     var hexString = "#"
     if let components {
-        hexString += String(format: "%02hhX", components.red * 256)
-        hexString += String(format: "%02hhX", components.green * 256)
-        hexString += String(format: "%02hhX", components.blue * 256)
+        let red = max(0.0, min(components.red, 1.0))
+        let green = max(0.0, min(components.green, 1.0))
+        let blue = max(0.0, min(components.blue, 1.0))
+        
+        hexString += String(format: "%02X", Int(red * 255))
+        hexString += String(format: "%02X", Int(green * 255))
+        hexString += String(format: "%02X", Int(blue * 255))
     } else {
         hexString += "0369A1"
     }

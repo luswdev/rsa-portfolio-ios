@@ -16,7 +16,7 @@ struct HistoryTabView: View {
     
     @State private var showDetail = false
     @State private var showEdit = false
-    @State private var clickIndex: Int = 0
+    @State private var clickIndex: Int = -1
     @State private var showIndex: Int = 0
 
     @State private var newRecord: HistoryStruct = HistoryStruct(date: "", usCost: 0, usBalance: 0, twCost: 0, twBalance: 0)
@@ -222,6 +222,7 @@ struct HistoryTabView: View {
             }
             .toolbar {
                 Button {
+                    editSuccess = false
                     newRecord = HistoryStruct(date: "", usCost: 0, usBalance: 0, twCost: 0, twBalance: 0)
                     showEdit = true
                } label: {
@@ -236,8 +237,11 @@ struct HistoryTabView: View {
                .buttonStyle(.plain)
             }
             .onChange(of: clickIndex) {
-                showIndex = clickIndex
-                showDetail = true
+                if clickIndex != -1 {
+                    showIndex = clickIndex
+                    showDetail = true
+                    clickIndex = -1
+                }
             }
             .navigationTitle("Histories")
         }
@@ -245,8 +249,8 @@ struct HistoryTabView: View {
             HistoryDetailView(
                 twdusd: twdusd,
                 selectedCurrency: $selectedCurrency,
-                history: $histories[clickIndex],
-                historyIndex: clickIndex,
+                history: $histories[showIndex],
+                historyIndex: showIndex,
                 needUpload: $needUpload
             )
         }

@@ -71,7 +71,7 @@ struct HistoryEditorView: View {
                             presentationMode.wrappedValue.dismiss()
                         },
                         label: {
-                            Text("Save Hold")
+                            Text("Save Record")
                                 .foregroundColor(Color("Main"))
                                 .frame(maxWidth: .infinity)
                         }
@@ -79,7 +79,7 @@ struct HistoryEditorView: View {
                 }
             }
             .padding(.vertical)
-            .navigationTitle("New Hold")
+            .navigationTitle("New Record")
         }
         .alert(isPresented: $showAlert) {
             Alert(

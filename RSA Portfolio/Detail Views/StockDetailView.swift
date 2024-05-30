@@ -9,7 +9,8 @@ import Foundation
 import SwiftUI
 
 struct StockDetailView: View {
-    var position: PositionStruct
+    @Binding private var position: PositionStruct
+    var dummyPosition: PositionStruct
     
     var returns: Float {
         Float(truncating: ((position.current * position.quantity - position.cost) / position.cost) as NSNumber)
@@ -17,7 +18,10 @@ struct StockDetailView: View {
     
     @Binding private var trendStyle: Bool
 
+    @State private var editSuccess: Bool = false
     @State private var showEdit = false
+    
+    @Binding private var needUpload: Bool
     
     var body: some View {
         NavigationView {
@@ -96,7 +100,8 @@ struct StockDetailView: View {
             }
             .toolbar {
                 Button {
-                   showEdit = true
+                    editSuccess = false
+                    showEdit = true
                } label: {
                    HStack {
                        Image(systemName: "pencil")
@@ -110,23 +115,35 @@ struct StockDetailView: View {
             }
             .navigationTitle(position.name)
         }
-        .sheet(isPresented: $showEdit) {
-            StockEditorView(position: position)
+        .sheet(isPresented: $showEdit, onDismiss: {
+            if !editSuccess {
+                position = dummyPosition
+                return
+            }
+            editSuccess = true
+            needUpload = true
+        }) {
+            StockEditorView(position: $position, editSuccess: $editSuccess)
         }
     }
 
     init(
-        position: PositionStruct,
-        trendStyle: Binding<Bool>
+        position: Binding<PositionStruct>,
+        trendStyle: Binding<Bool>,
+        needUpload: Binding<Bool>
     ) {
-        self.position = position
+        self._position = position
         self._trendStyle = trendStyle
+        self._needUpload = needUpload
+        
+        self.dummyPosition = position.wrappedValue
     }
 }
 
 #Preview {
     StockDetailView(
-        position: PositionStruct(ticker: "QQQ", name: "Invesco QQQ Trust", quantity: 0.66656, cost: 300, color: "#26a69a"),
-        trendStyle: .constant(false)
+        position: .constant(PositionStruct(ticker: "QQQ", name: "Invesco QQQ Trust", quantity: 0.66656, cost: 300, color: "#26a69a")),
+        trendStyle: .constant(false),
+        needUpload: .constant(false)
     )
 }

@@ -80,7 +80,8 @@ struct HistoryDetailView: View {
             }
             .toolbar {
                 Button {
-                   showEdit = true
+                    editSuccess = false
+                    showEdit = true
                } label: {
                    HStack {
                        Image(systemName: "pencil")

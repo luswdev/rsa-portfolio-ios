@@ -15,9 +15,12 @@ struct PositionTabView: View {
     var API: PortfolioAPI
     
     @State private var showDetail = false
-    @State private var showNew = false
-    @State private var clickIndex: Int = 0
+    @State private var showEdit = false
+    @State private var clickIndex: Int = -1
     @State private var showIndex: Int = 0
+
+    @State private var newRecord: PositionStruct = PositionStruct(ticker: "", name: "", quantity: 0, cost: 0, color: "")
+
     @Binding private var trendStyle: Bool
     
     @State private var height1: CGFloat = .zero
@@ -31,6 +34,9 @@ struct PositionTabView: View {
     @State private var selectedValue: Float?
     
     @Binding private var selectedCurrency: CurrencyBase
+
+    @Binding private var needUpload: Bool
+    @State private var editSuccess: Bool = false
     
     var totalValue: Decimal {
         positions.reduce(into: Decimal(0)) { (result, position) in
@@ -146,6 +152,14 @@ struct PositionTabView: View {
                                         clickIndex = index
                                     }
                                 }
+                                .onDelete(perform: { offsets in
+                                    positions.remove(atOffsets: offsets)
+                                    needUpload = true
+                                })
+                                .onMove(perform: { fromIdx, toIdx in
+                                    positions.move(fromOffsets: fromIdx, toOffset: toIdx)
+                                    needUpload = true
+                                })
                             }
                         }
                         .frame(width: geometry.size.width, height: geometry.size.height)
@@ -154,14 +168,19 @@ struct PositionTabView: View {
                 
             }
             .onChange(of: clickIndex) {
-                showIndex = clickIndex
-                showDetail = true
+                if clickIndex != -1 {
+                    showIndex = clickIndex
+                    showDetail = true
+                    clickIndex = -1
+                }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             .navigationTitle("Positions")
             .toolbar {
                 Button {
-                   showNew = true
+                    editSuccess = false
+                    newRecord = PositionStruct(ticker: "", name: "", quantity: 0, cost: 0, color: "")
+                    showEdit = true
                } label: {
                    HStack {
                        Image(systemName: "plus.circle.fill")
@@ -176,12 +195,21 @@ struct PositionTabView: View {
         }
         .sheet(isPresented: $showDetail) {
             StockDetailView(
-                position: positions[clickIndex],
-                trendStyle: $trendStyle
+                position: $positions[showIndex],
+                trendStyle: $trendStyle,
+                needUpload: $needUpload
             )
         }
-        .sheet(isPresented: $showNew) {
-            StockEditorView(position: PositionStruct(ticker: "", name: "", quantity: 0, cost: 0, color: "#0369A1"))
+        .sheet(isPresented: $showEdit, onDismiss: {
+            if !editSuccess {
+                return
+            }
+            editSuccess = true
+            
+            positions.append(newRecord)
+            needUpload = true
+        }) {
+            StockEditorView(position: $newRecord, editSuccess: $editSuccess)
         }
     }
 
@@ -190,13 +218,15 @@ struct PositionTabView: View {
         twdusd: Binding<Decimal>,
         selectedCurrency: Binding<CurrencyBase>,
         trendStyle: Binding<Bool>,
-        API: PortfolioAPI = PortfolioAPI()
+        API: PortfolioAPI = PortfolioAPI(),
+        needUpload: Binding<Bool>
     ) {
         self.API = API
         self._twdusd = twdusd
         self._selectedCurrency = selectedCurrency
         self._positions = positions
         self._trendStyle = trendStyle
+        self._needUpload = needUpload
     }
 
     private func findSelectedSector(value: Decimal) -> PositionStruct? {
@@ -249,6 +279,7 @@ var positions = [
         positions: .constant(positions),
         twdusd: .constant(30),
         selectedCurrency: .constant(CurrencyBase.twd),
-        trendStyle: .constant(false)
+        trendStyle: .constant(false),
+        needUpload: .constant(false)
     )
 }
